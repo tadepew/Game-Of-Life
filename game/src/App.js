@@ -5,7 +5,10 @@ import Game from "../src/Grid";
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
+      <header>
+        <h1>Game of Life</h1>
+      </header>
       <Game />
     </div>
   );

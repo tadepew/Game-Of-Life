@@ -64,13 +64,14 @@ const Game = () => {
   });
 
   const [start, setStart] = useState(false);
+  const [speed, setSpeed] = useState(1000);
 
   const startRef = useRef(start);
   //curent value of ref is start
   //use current value in a callback
   startRef.current = start;
 
-  const runGame = useCallback(() => {
+  useInterval(() => {
     if (!startRef.current) {
       return; // this is basically our 'base case' for the recursive function
     }
@@ -99,24 +100,48 @@ const Game = () => {
         }
       });
     });
-    setTimeout(runGame, 1000);
-  }, []);
+  }, speed);
 
   return (
     // wrap in a fragment
     <>
-      <button
-        onClick={() => {
-          setStart(!start);
-          if (!start) {
-            startRef.current = true;
-            runGame();
-          }
-        }}
-      >
-        {start ? "Stop" : "Start"}
-      </button>
+      <div className="buttons">
+        <button
+          onClick={() => {
+            if (start) {
+              setStart(false);
+            } else {
+              setStart(true);
+            }
+          }}
+        >
+          {start ? "Stop" : "Start"}
+        </button>
+        <button
+          onClick={() => {
+            setGrid(initalizeGrid());
+            setStart(false);
+          }}
+        >
+          Clear
+        </button>
+        <button
+          onClick={() => {
+            setSpeed(speed / 2);
+          }}
+        >
+          Speed up
+        </button>
+        <button
+          onClick={() => {
+            setSpeed(speed * 2);
+          }}
+        >
+          Slow down
+        </button>
+      </div>
       <div
+        className="default-grid"
         style={{
           display: "grid",
           gridTemplateColumns: `repeat(${numCols}, 20px)`,
@@ -135,7 +160,7 @@ const Game = () => {
               style={{
                 width: 20,
                 height: 20,
-                backgroundColor: grid[i][j] ? "black" : "blue",
+                backgroundColor: grid[i][j] ? "darkcyan" : "white",
                 border: "solid 1px black",
               }}
             />
