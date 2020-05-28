@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import produce from "immer";
 import useInterval from "../src/hooks/useInterval";
+import { Link } from "@reach/router";
 
 // export default function Grid({ toggle, clickable }) {
 //   const [grid, setGrid] = useState(cellGrid);
@@ -73,7 +74,7 @@ const Game = () => {
 
   useInterval(() => {
     if (!startRef.current) {
-      return; // this is basically our 'base case' for the recursive function
+      return;
     }
     setGrid((g) => {
       return produce(g, (gridCopy) => {
@@ -152,10 +153,14 @@ const Game = () => {
             <div
               key={`${i}-${j}`}
               onClick={() => {
-                const nextGen = produce(grid, (gridCopy) => {
-                  gridCopy[i][j] = grid[i][j] ? 0 : 1; // toggles
-                });
-                setGrid(nextGen);
+                if (start) {
+                  return null;
+                } else {
+                  const nextGen = produce(grid, (gridCopy) => {
+                    gridCopy[i][j] = grid[i][j] ? 0 : 1; // toggles
+                  });
+                  setGrid(nextGen);
+                }
               }}
               style={{
                 width: 20,
