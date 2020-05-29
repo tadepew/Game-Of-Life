@@ -25,6 +25,14 @@ code {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.app header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .default-grid {
@@ -46,7 +54,8 @@ button {
   width: 60%;
 }
 
-.link {
-  display: flex;
-  justify-content: center;
+.gens {
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 1.5rem;
 }

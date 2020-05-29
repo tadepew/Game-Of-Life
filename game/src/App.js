@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Router, Link, Match } from "@reach/router";
 import Game from "../src/Grid";
@@ -9,7 +8,7 @@ function App() {
   return (
     <div className="app">
       <header>
-        <h1>Game of Life</h1>
+        <h1>Conway's Game of Life</h1>
         <div className="link">
           <Match path="/">
             {(props) =>
